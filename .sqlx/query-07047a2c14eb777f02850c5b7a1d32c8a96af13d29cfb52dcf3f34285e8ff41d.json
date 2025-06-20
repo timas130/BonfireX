@@ -1,0 +1,112 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select\n                 u.*,\n                 u.id as user_id,\n                 s.id as session_id,\n                 s.created_at as session_created_at,\n                 s.expires_at as session_expires_at,\n                 uc.ip,\n                 uc.user_agent,\n                 uc.lang_id\n             from auth_core.sessions s\n             inner join auth_core.users u on u.id = s.user_id\n             inner join auth_core.user_contexts uc on uc.id = s.last_user_context_id\n             where access_token = $1 and expires_at > now()",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "email",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "permission_level",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 3,
+        "name": "banned",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 4,
+        "name": "active",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 5,
+        "name": "email_verification_sent_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 6,
+        "name": "email_verification_code",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 7,
+        "name": "password",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 8,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 9,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 10,
+        "name": "session_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 11,
+        "name": "session_created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 12,
+        "name": "session_expires_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 13,
+        "name": "ip",
+        "type_info": "Inet"
+      },
+      {
+        "ordinal": 14,
+        "name": "user_agent",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 15,
+        "name": "lang_id",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "07047a2c14eb777f02850c5b7a1d32c8a96af13d29cfb52dcf3f34285e8ff41d"
+}

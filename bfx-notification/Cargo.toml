@@ -1,0 +1,25 @@
+[package]
+name = "bfx-notification"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+bfx-core = { workspace = true }
+bfx-proto = { workspace = true }
+
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+sqlx = { workspace = true }
+tonic = { workspace = true }
+
+nanoid = { workspace = true }
+minijinja = { workspace = true }
+serde = { workspace = true }
+serde_yml = { workspace = true }
+schemars = { workspace = true }
+serde_json = { workspace = true }
+prost = { workspace = true }

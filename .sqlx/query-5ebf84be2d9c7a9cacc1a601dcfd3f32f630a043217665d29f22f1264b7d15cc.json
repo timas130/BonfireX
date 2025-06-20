@@ -1,0 +1,32 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select id, lang_id, modified_at from translation.resources for update",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "lang_id",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "modified_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "5ebf84be2d9c7a9cacc1a601dcfd3f32f630a043217665d29f22f1264b7d15cc"
+}

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package bfx.notification.email;
+
+service NotificationEmail {
+  rpc SendEmail (SendEmailRequest) returns (SendEmailReply);
+
+  rpc SetEmailBlocked (SetEmailBlockedRequest) returns (SetEmailBlockedReply);
+
+  rpc CheckValidEmail (CheckValidEmailRequest) returns (CheckValidEmailReply);
+}
+
+message SendEmailRequest {
+  string to = 1;
+  optional string to_name = 2;
+  string subject = 3;
+  string body_html = 4;
+}
+
+message SendEmailReply {
+  string id = 1;
+}
+
+message SetEmailBlockedRequest {
+  string email = 1;
+  bool blocked = 2;
+}
+
+message SetEmailBlockedReply {
+}
+
+message CheckValidEmailRequest {
+  string email = 1;
+}
+
+message CheckValidEmailReply {
+  bool valid = 1;
+  optional EmailValidationError error = 2;
+}
+
+enum EmailValidationError {
+  PARSING_ERROR = 0;
+  BLOCKED_BY_USER = 1;
+  BLOCKED_DOMAIN_OR_MX = 2;
+  NO_MX_RECORDS = 3;
+}

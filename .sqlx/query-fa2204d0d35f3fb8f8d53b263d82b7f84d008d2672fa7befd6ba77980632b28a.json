@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into profile.notes (user_id, profile_id, note)\n             values ($1, $2, $3)\n             on conflict (user_id, profile_id) do update set note = $3",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "fa2204d0d35f3fb8f8d53b263d82b7f84d008d2672fa7befd6ba77980632b28a"
+}

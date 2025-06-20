@@ -12,12 +12,22 @@ service AuthCore {
   rpc LoginEmail (LoginEmailRequest) returns (LoginEmailReply);
 
   rpc GetUserByToken (GetUserByTokenRequest) returns (GetUserByTokenReply);
+
+  rpc SendVerificationEmail (SendVerificationEmailRequest) returns (SendVerificationEmailReply);
+
+  rpc VerifyEmail (VerifyEmailRequest) returns (VerifyEmailReply);
+
+  rpc ChangePassword (ChangePasswordRequest) returns (ChangePasswordReply);
+
+  rpc GetUserByEmail (GetUserByEmailRequest) returns (GetUserByEmailReply);
+
+  rpc LoginExternal (LoginExternalRequest) returns (LoginExternalReply);
 }
 
 enum PermissionLevel {
   USER = 0;
-  ADMIN = 1;
-  SYSTEM = 2;
+  ADMIN = 10;
+  SYSTEM = 20;
 }
 
 message User {
@@ -41,9 +51,11 @@ message CreateUserRequest {
   optional string email = 1;
   bool active = 2;
   optional string password = 3;
+  UserContext user_context = 4;
 }
 message CreateUserReply {
   User user = 1;
+  Tokens tokens = 2;
 }
 
 message LoginEmailRequest {
@@ -72,7 +84,7 @@ enum TfaMethod {
 message Tokens {
   string access_token = 1;
   int64 session_id = 2;
-  int64 login_attempt_id = 3;
+  optional int64 login_attempt_id = 3;
 }
 
 enum LoginAttemptStatus {
@@ -97,4 +109,50 @@ message Session {
 message GetUserByTokenReply {
   User user = 1;
   Session session = 2;
+}
+
+message SendVerificationEmailRequest {
+  string email = 1;
+  bfx.UserContext user_context = 2;
+}
+
+message SendVerificationEmailReply {
+}
+
+message VerifyEmailRequest {
+  string token = 1;
+}
+
+message VerifyEmailReply {
+  User user = 1;
+}
+
+message ChangePasswordRequest {
+  int64 user_id = 1;
+  // if present, the user is changing their own password
+  // otherwise, it's another service changing the password of the user
+  optional string old_password = 2;
+  string new_password = 3;
+  bfx.UserContext user_context = 4;
+  bool terminate_all_sessions = 5;
+}
+
+message ChangePasswordReply {
+}
+
+message GetUserByEmailRequest {
+  string email = 1;
+}
+
+message GetUserByEmailReply {
+  optional User user = 1;
+}
+
+message LoginExternalRequest {
+  int64 user_id = 1;
+  bfx.UserContext user_context = 2;
+}
+
+message LoginExternalReply {
+  Tokens tokens = 1;
 }

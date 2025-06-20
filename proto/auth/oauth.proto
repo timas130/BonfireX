@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+import "types.proto";
+import "auth/core.proto";
+
+package bfx.auth;
+
+service AuthOAuth {
+  rpc StartOauthFlow (StartOAuthFlowRequest) returns (StartOAuthFlowReply);
+  rpc FinishOauthFlow (FinishOAuthFlowRequest) returns (FinishOAuthFlowReply);
+  rpc BindOauth (BindOAuthRequest) returns (BindOAuthReply);
+  rpc GetAuthSources (GetAuthSourcesRequest) returns (GetAuthSourcesReply);
+  rpc UnbindAuthSource (UnbindAuthSourceRequest) returns (UnbindAuthSourceReply);
+}
+
+message StartOAuthFlowRequest {
+  string issuer = 1;
+}
+
+message StartOAuthFlowReply {
+  string scope = 1;
+  string state = 2;
+  string nonce = 3;
+  string url = 4;
+  optional string code_challenge = 5;
+  optional string code_challenge_method = 6;
+}
+
+message FinishOAuthFlowRequest {
+  string issuer = 1;
+  string state = 2;
+  string code = 3;
+  bfx.UserContext user_context = 4;
+}
+
+message FinishOAuthFlowReply {
+  optional bfx.auth.Tokens tokens = 1;
+  bool existing_email = 2;
+}
+
+message BindOAuthRequest {
+  FinishOAuthFlowRequest finish_request = 1;
+  int64 user_id = 2;
+}
+
+message BindOAuthReply {
+  AuthSource auth_source = 1;
+}
+
+message GetAuthSourcesRequest {
+  int64 user_id = 1;
+}
+
+message GetAuthSourcesReply {
+  repeated AuthSource auth_sources = 1;
+}
+
+message AuthSource {
+  int64 id = 1;
+  int64 user_id = 2;
+  string issuer = 3;
+  string issuer_user_id = 4;
+  bfx.DateTime created_at = 5;
+}
+
+message UnbindAuthSourceRequest {
+  int64 auth_source_id = 1;
+  int64 user_id = 2;
+  bfx.UserContext user_context = 3;
+}
+
+message UnbindAuthSourceReply {
+}

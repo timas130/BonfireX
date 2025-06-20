@@ -18,7 +18,7 @@ impl AuthCoreService {
         let entropy = zxcvbn::zxcvbn(password, user_inputs);
         if entropy.score() < Score::Three {
             Err(Status::coded(
-                tonic::Code::Unauthenticated,
+                tonic::Code::InvalidArgument,
                 ErrorCode::WeakPassword,
             ))
         } else {

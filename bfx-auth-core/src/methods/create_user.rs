@@ -1,8 +1,8 @@
 use crate::AuthCoreService;
 use crate::models::user::RawUser;
+use bfx_core::service::database::DbResultExt;
 use bfx_core::status::{ErrorCode, StatusExt};
-use bfx_proto::auth::{CreateUserReply, CreateUserRequest};
-use sqlx::error::ErrorKind;
+use bfx_proto::auth::{CreateUserReply, CreateUserRequest, LoginAttemptStatus, User};
 use tonic::{Code, Request, Response, Status};
 
 impl AuthCoreService {
@@ -20,8 +20,12 @@ impl AuthCoreService {
     ) -> Result<Response<CreateUserReply>, Status> {
         let request = request.into_inner();
 
+        let user_context = request
+            .user_context
+            .ok_or_else(|| Status::coded(Code::InvalidArgument, ErrorCode::Internal))?;
+
         if let Some(email) = &request.email {
-            self.check_email(email)?;
+            self.check_email(email).await?;
         }
 
         let password = if let Some(password) = request.password {
@@ -49,16 +53,26 @@ impl AuthCoreService {
         .fetch_one(&self.db)
         .await;
 
-        if let Err(err) = &result {
-            if let Some(err) = err.as_database_error() {
-                if err.kind() == ErrorKind::UniqueViolation {
-                    return Err(Status::coded(Code::AlreadyExists, ErrorCode::EmailExists));
-                }
-            }
+        if result.is_unique_violation() {
+            return Err(Status::coded(Code::AlreadyExists, ErrorCode::EmailExists));
         }
 
-        let result = result.map_err(Status::db)?.into();
+        let result: User = result.map_err(Status::db)?.into();
 
-        Ok(Response::new(CreateUserReply { user: Some(result) }))
+        let login_attempt = self
+            .create_login_attempt(result.id, &user_context, LoginAttemptStatus::Success)
+            .await?;
+        let session = self
+            .create_session(
+                result.id,
+                Some(login_attempt.id),
+                login_attempt.user_context_id,
+            )
+            .await?;
+
+        Ok(Response::new(CreateUserReply {
+            user: Some(result),
+            tokens: Some(session.into()),
+        }))
     }
 }

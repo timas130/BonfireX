@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into image.image_refs\n             (image_id, ref_id, created_at)\n             values ($1, $2, now())\n             on conflict (image_id, ref_id) do nothing",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "050286ea9d6222e4f0eb24c1d599e539d3a22e447524eeba9d5bbd3ec7882dae"
+}

@@ -1,0 +1,71 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update auth_core.users set password = $1 where id = $2 returning *",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "email",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "permission_level",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 3,
+        "name": "banned",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 4,
+        "name": "active",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 5,
+        "name": "email_verification_sent_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 6,
+        "name": "email_verification_code",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 7,
+        "name": "password",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 8,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  "hash": "a96265777f4311c0a3a7338b17ecefdbc552e714c5610dd4fcd1ae600df6912e"
+}

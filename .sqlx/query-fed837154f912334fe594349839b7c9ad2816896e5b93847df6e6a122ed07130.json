@@ -1,0 +1,46 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select * from auth_oauth.auth_sources where user_id = $1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "issuer",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "issuer_user_id",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "fed837154f912334fe594349839b7c9ad2816896e5b93847df6e6a122ed07130"
+}

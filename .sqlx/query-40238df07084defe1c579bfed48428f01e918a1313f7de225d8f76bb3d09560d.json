@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update auth_core.users\n             set active = true,\n                 email_verification_sent_at = null,\n                 email_verification_code = null\n             where id = $1",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "40238df07084defe1c579bfed48428f01e918a1313f7de225d8f76bb3d09560d"
+}

@@ -1,0 +1,49 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "with ctx as (\n                 insert into auth_core.user_contexts (ip, user_agent)\n                 values ($2, $3)\n                 on conflict (ip, user_agent) do update set ip = excluded.ip\n                 returning id\n             )\n             insert into auth_core.login_attempts (user_id, user_context_id, status)\n             select $1, id, $4 from ctx\n             returning *",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "user_context_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "status",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 4,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Inet",
+        "Text",
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "1a72547da01fd117fd067b7d8c5c5e4f36351c84ee271d42c36f8eb87a408abf"
+}

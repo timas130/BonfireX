@@ -1,0 +1,47 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select *\n             from image.image_tickets\n             where ticket = $1 and\n                   user_id = $2 and\n                   created_at > now() - interval '1 hour'\n             for update",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "ticket",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "image_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      true,
+      false
+    ]
+  },
+  "hash": "ff7fc0daa80f86f32b7cf580ec05c40ff78b67bff00e89aa4aecc9a4ac68c466"
+}

@@ -7,6 +7,7 @@ create table auth_core.users (
     banned bool not null default false,
     active bool not null default false,
     email_verification_sent_at timestamptz null,
+    email_verification_code text null unique,
     password text null,
     created_at timestamptz not null default now()
 );

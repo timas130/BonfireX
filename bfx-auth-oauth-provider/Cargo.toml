@@ -1,0 +1,22 @@
+[package]
+name = "bfx-auth-oauth-provider"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+bfx-core = { workspace = true, features = ["id_encryption"] }
+bfx-proto = { workspace = true }
+
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tonic = { workspace = true }
+sqlx = { workspace = true }
+tracing = { workspace = true }
+
+openidconnect = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+nanoid = { workspace = true }

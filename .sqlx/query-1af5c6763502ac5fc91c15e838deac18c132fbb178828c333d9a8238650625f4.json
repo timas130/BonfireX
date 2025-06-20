@@ -1,0 +1,70 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select * from auth_core.users where id = $1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "email",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "permission_level",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 3,
+        "name": "banned",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 4,
+        "name": "active",
+        "type_info": "Bool"
+      },
+      {
+        "ordinal": 5,
+        "name": "email_verification_sent_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 6,
+        "name": "email_verification_code",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 7,
+        "name": "password",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 8,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      false
+    ]
+  },
+  "hash": "1af5c6763502ac5fc91c15e838deac18c132fbb178828c333d9a8238650625f4"
+}

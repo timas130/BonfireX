@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../bfx-notification/definition-schema.json
+
+id: email_verification
+category: auth
+
+email:
+  subject: '{{ t("email-verify-subject") }}'
+  body: |-
+    <p>{{ t("email-verify-text1") }}</p>
+    
+    <p><a href="{{ verify_url }}">{{ verify_url }}</a></p>
+    
+    <p>{{ t("email-verify-text2") }}</p>
+  include-template: true
+  is-list: false

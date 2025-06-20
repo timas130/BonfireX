@@ -1,0 +1,25 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into notification.notifications\n             (user_id, definition_id, data, params)\n             values ($1, $2, $3, $4)\n             returning id",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Jsonb",
+        "Bytea"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "a1af04840e99e5621c434cc2fdc30fd51a2a32099a1618a267197393e6dd3e71"
+}

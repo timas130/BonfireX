@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "delete from image.image_refs\n             where image_id = $1 and ref_id = $2",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "0f43f3426546b4f1b57455674aa9fd6e30a7b85ee3f880919a870237540d0b2b"
+}

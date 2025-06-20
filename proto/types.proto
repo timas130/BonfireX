@@ -12,4 +12,12 @@ message DateTime {
 message UserContext {
   string ip = 1;
   string user_agent = 2;
+  string lang_id = 3;
+}
+
+message ParamValue {
+  oneof param_value {
+    string string = 1;
+    int64 number = 2;
+  }
 }

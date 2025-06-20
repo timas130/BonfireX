@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../bfx-notification/definition-schema.json
+
+id: oauth_unbound
+category: auth
+
+email:
+  subject: '{{ t("oauth-unbound-subject") }}'
+  body: |-
+    <p>{{ t("oauth-bound-text", provider = provider) }}</p>
+    
+    <p>
+    {{ t("audit-time", time=audit_time) }}<br>
+    {{ t("audit-ip", ip=audit_ip) }}
+    </p>
+  include-template: true
+  is-list: false
+
+in-app:
+  title: '{{ t("oauth-unbound-title", provider = provider) }}'
+  body: '{{ t("oauth-unbound-body", provider = provider) }}'

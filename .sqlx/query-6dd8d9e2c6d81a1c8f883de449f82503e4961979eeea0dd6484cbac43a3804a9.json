@@ -1,0 +1,53 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "delete from auth_oauth.flows where issuer = $1 and state = $2 returning *",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "issuer",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "state",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "nonce",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "pkce_verifier",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "6dd8d9e2c6d81a1c8f883de449f82503e4961979eeea0dd6484cbac43a3804a9"
+}

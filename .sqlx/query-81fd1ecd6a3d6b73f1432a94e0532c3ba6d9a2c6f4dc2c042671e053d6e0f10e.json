@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into profile.usernames (user_id, username)\n             values ($1, $2)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "81fd1ecd6a3d6b73f1432a94e0532c3ba6d9a2c6f4dc2c042671e053d6e0f10e"
+}

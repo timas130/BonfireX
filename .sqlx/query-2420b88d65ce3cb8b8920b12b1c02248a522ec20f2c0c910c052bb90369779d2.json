@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select id from notification_email.blocked_emails where email = $1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "2420b88d65ce3cb8b8920b12b1c02248a522ec20f2c0c910c052bb90369779d2"
+}

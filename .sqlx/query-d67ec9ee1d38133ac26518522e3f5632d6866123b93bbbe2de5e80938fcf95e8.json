@@ -1,0 +1,24 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into translation.resources (path, lang_id, source, modified_at)\n             values ($1, $2, $3, now())\n             on conflict (path)\n             do update set\n                 source = excluded.source,\n                 modified_at = now()\n             returning id",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "d67ec9ee1d38133ac26518522e3f5632d6866123b93bbbe2de5e80938fcf95e8"
+}

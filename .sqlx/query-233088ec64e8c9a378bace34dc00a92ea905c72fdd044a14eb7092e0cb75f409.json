@@ -1,0 +1,66 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into profile.profiles (user_id, username)\n             values ($1, $2)\n             on conflict (user_id)\n             do update set username = $2\n             returning\n                 *,\n                 (select n.note\n                  from profile.notes n\n                  where n.profile_id = profile.profiles.user_id and n.user_id = $3)",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "display_name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "username",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "avatar_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "bio",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "cover_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 6,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 7,
+        "name": "note",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      null
+    ]
+  },
+  "hash": "233088ec64e8c9a378bace34dc00a92ea905c72fdd044a14eb7092e0cb75f409"
+}

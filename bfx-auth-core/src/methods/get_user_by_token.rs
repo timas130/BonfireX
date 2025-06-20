@@ -1,5 +1,4 @@
 use crate::AuthCoreService;
-use crate::models::session::RawSession;
 use crate::models::user::RawUser;
 use bfx_core::status::{ErrorCode, StatusExt};
 use bfx_proto::UserContext;
@@ -8,6 +7,11 @@ use tonic::{Code, Request, Response, Status};
 
 impl AuthCoreService {
     /// Get a user by their access token
+    ///
+    /// # Errors
+    ///
+    /// - If the access token is invalid or expired
+    /// - Miscellaneous internal errors
     pub async fn get_user_by_token(
         &self,
         request: Request<GetUserByTokenRequest>,
@@ -24,7 +28,8 @@ impl AuthCoreService {
                  s.created_at as session_created_at,
                  s.expires_at as session_expires_at,
                  uc.ip,
-                 uc.user_agent
+                 uc.user_agent,
+                 uc.lang_id
              from auth_core.sessions s
              inner join auth_core.users u on u.id = s.user_id
              inner join auth_core.user_contexts uc on uc.id = s.last_user_context_id
@@ -42,6 +47,17 @@ impl AuthCoreService {
             ));
         };
 
+        if !session.active {
+            return Err(Status::coded(
+                Code::PermissionDenied,
+                ErrorCode::UserNotActive,
+            ));
+        }
+
+        if session.banned {
+            return Err(Status::coded(Code::PermissionDenied, ErrorCode::UserBanned));
+        }
+
         Ok(Response::new(GetUserByTokenReply {
             user: Some(
                 RawUser {
@@ -51,6 +67,7 @@ impl AuthCoreService {
                     banned: session.banned,
                     active: session.active,
                     email_verification_sent_at: session.email_verification_sent_at,
+                    email_verification_code: session.email_verification_code,
                     password: session.password,
                     created_at: session.created_at,
                 }
@@ -62,6 +79,7 @@ impl AuthCoreService {
                 user_context: Some(UserContext {
                     ip: session.ip.to_string(),
                     user_agent: session.user_agent,
+                    lang_id: session.lang_id,
                 }),
                 expires_at: Some(session.session_expires_at.into()),
                 created_at: Some(session.session_created_at.into()),

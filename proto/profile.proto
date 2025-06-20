@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+import "image.proto";
+
+package bfx.profile;
+
+service Profile {
+  rpc GetProfile (GetProfileRequest) returns (GetProfileReply) {}
+  rpc GetProfileBulk (GetProfileBulkRequest) returns (GetProfileBulkReply) {}
+  rpc UpdateProfile (UpdateProfileRequest) returns (UpdateProfileReply) {}
+  rpc UpdateUsername (UpdateUsernameRequest) returns (UpdateUsernameReply) {}
+  rpc SetNote (SetNoteRequest) returns (SetNoteReply) {}
+}
+
+message GetProfileRequest {
+  oneof request {
+    int64 user_id = 1;
+    string username = 2;
+  }
+  optional int64 for_user_id = 3;
+}
+
+message GetProfileReply {
+  optional ProfileDetails profile = 1;
+}
+
+message GetProfileBulkRequest {
+  repeated GetProfileRequest requests = 1;
+}
+
+message GetProfileBulkReply {
+  repeated BulkProfileDetails profiles = 1;
+}
+
+message BulkProfileDetails {
+  GetProfileRequest request = 1;
+  ProfileDetails profile = 2;
+}
+
+message ProfileDetails {
+  int64 user_id = 1;
+  string username = 2;
+  optional string display_name = 3;
+  optional int64 avatar = 4;
+  string bio = 5;
+  optional int64 cover = 6;
+  // this is null only if GetProfileRequest.for_user_id is not set
+  optional string note = 7;
+}
+
+message UpdateProfileRequest {
+  int64 user_id = 1;
+  optional int64 for_user_id = 2;
+
+  optional string display_name = 3;
+  optional string avatar_ticket = 4;
+  optional string bio = 5;
+  optional string cover_ticket = 6;
+}
+
+message UpdateProfileReply {
+  ProfileDetails profile = 1;
+  repeated string errors = 2;
+}
+
+message UpdateUsernameRequest {
+  int64 user_id = 1;
+  optional int64 for_user_id = 2;
+  string username = 3;
+}
+
+message UpdateUsernameReply {
+  ProfileDetails profile = 1;
+}
+
+message SetNoteRequest {
+  // the user noting
+  int64 user_id = 1;
+  // the profile being noted
+  int64 profile_id = 2;
+  string note = 3;
+}
+
+message SetNoteReply {
+  ProfileDetails profile = 1;
+}

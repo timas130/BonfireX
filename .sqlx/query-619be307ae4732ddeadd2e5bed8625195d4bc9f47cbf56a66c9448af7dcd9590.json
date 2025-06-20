@@ -1,0 +1,47 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into auth_password_recovery.password_reset_requests\n             (user_id, token)\n             values ($1, $2)\n             returning *",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "token",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 4,
+        "name": "used_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "hash": "619be307ae4732ddeadd2e5bed8625195d4bc9f47cbf56a66c9448af7dcd9590"
+}

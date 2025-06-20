@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update image.image_tickets\n         set image_id = $1, created_at = now()\n         where id = $2",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "22914f849f263333e827d072a8a53cdd021bfb7d94c90cc31cbf70d09bc9fa69"
+}

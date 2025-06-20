@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+import "types.proto";
+
+package bfx.image;
+
+service Image {
+  rpc RequestUpload (RequestUploadRequest) returns (RequestUploadResponse);
+  rpc UseImageTicket (UseImageTicketRequest) returns (UseImageTicketResponse);
+  rpc GetImage (GetImageRequest) returns (GetImageResponse);
+  rpc GetImageBulk (GetImageBulkRequest) returns (GetImageBulkResponse);
+  rpc SetImageRef (SetImageRefRequest) returns (SetImageRefResponse);
+}
+
+message RequestUploadRequest {
+  int64 user_id = 1;
+}
+
+message RequestUploadResponse {
+  string ticket = 1;
+}
+
+message UseImageTicketRequest {
+  string ticket = 1;
+  int64 user_id = 2;
+  optional string ref_id = 3;
+}
+
+message UseImageTicketResponse {
+  ImageDesc image = 1;
+}
+
+message ImageDesc {
+  int64 id = 1;
+  ImageVariant full = 2;
+  ImageVariant thumbnail = 3;
+  bytes blur_data = 4;
+  bfx.DateTime created_at = 5;
+}
+
+message ImageVariant {
+  uint32 width = 1;
+  uint32 height = 2;
+  uint64 size = 3;
+  string url = 4;
+}
+
+message GetImageRequest {
+  int64 image_id = 1;
+  // for ref auditing only
+  optional string ref_id = 2;
+}
+
+message GetImageResponse {
+  optional ImageDesc image = 1;
+}
+
+message GetImageBulkRequest {
+  repeated GetImageRequest requests = 1;
+}
+
+message GetImageBulkResponse {
+  repeated GetImageResponse responses = 1;
+}
+
+message SetImageRefRequest {
+  int64 image_id = 1;
+  string ref_id = 2;
+  bool exists = 3;
+}
+
+message SetImageRefResponse {
+}

@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into auth_oauth.flows\n             (issuer, state, nonce, pkce_verifier)\n             values ($1, $2, $3, $4)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "681b2064c14ed564a01201a2f247b4b51ce26a75a7f717e310a10f3182834ed1"
+}

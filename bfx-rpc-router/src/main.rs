@@ -1,5 +1,3 @@
-#![warn(clippy::all, clippy::pedantic, clippy::nursery)]
-
 mod forwarder;
 mod registry;
 mod registry_service;
@@ -29,7 +27,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let listener = get_tcp_listener().await?;
 
+    let reflection_service = tonic_reflection::server::Builder::configure()
+        .register_encoded_file_descriptor_set(bfx_proto::FILE_DESCRIPTOR_SET)
+        .build_v1alpha()?;
+
     let router = Routes::default()
+        .add_service(reflection_service)
         .add_service(RouterRegistryServer::new(service))
         .into_axum_router()
         .fallback_service(forwarder.map_request(|req: Request<AxumBody>| req.map(Body::new)));

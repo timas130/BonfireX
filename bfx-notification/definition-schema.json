@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NotificationDefinition",
+  "type": "object",
+  "properties": {
+    "category": {
+      "$ref": "#/$defs/NotificationCategory"
+    },
+    "email": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/EmailDefinition"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "id": {
+      "type": "string"
+    },
+    "in-app": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/InAppDefinition"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "category"
+  ],
+  "$defs": {
+    "ConditionalString": {
+      "type": "object",
+      "properties": {
+        "if": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EmailDefinition": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/$defs/StringSet"
+        },
+        "include-template": {
+          "type": "boolean",
+          "default": true
+        },
+        "is-list": {
+          "type": "boolean"
+        },
+        "subject": {
+          "$ref": "#/$defs/StringSet"
+        }
+      },
+      "required": [
+        "subject",
+        "body",
+        "is-list"
+      ]
+    },
+    "InAppDefinition": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/$defs/StringSet"
+        },
+        "title": {
+          "$ref": "#/$defs/StringSet"
+        }
+      },
+      "required": [
+        "title",
+        "body"
+      ]
+    },
+    "NotificationCategory": {
+      "type": "string",
+      "enum": [
+        "announcements",
+        "auth"
+      ]
+    },
+    "StringSet": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ConditionalString"
+          }
+        }
+      ]
+    }
+  }
+}

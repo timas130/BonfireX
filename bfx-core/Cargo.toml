@@ -3,6 +3,9 @@ name = "bfx-core"
 version = "0.1.0"
 edition = "2024"
 
+[lints]
+workspace = true
+
 [dependencies]
 tokio = { workspace = true }
 tracing = { workspace = true }
@@ -13,3 +16,12 @@ bfx-proto = { workspace = true }
 sqlx = { workspace = true }
 anyhow = { workspace = true }
 strum = { workspace = true }
+rust-s3 = { workspace = true, optional = true }
+aes-gcm-siv = { workspace = true, optional = true }
+base64 = { workspace = true, optional = true }
+hkdf = { workspace = true, optional = true }
+sha2 = { workspace = true, optional = true }
+
+[features]
+s3 = ["rust-s3"]
+id_encryption = ["aes-gcm-siv", "base64", "hkdf", "sha2"]

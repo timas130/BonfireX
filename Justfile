@@ -17,6 +17,7 @@ container-runtime := if compose =~ "podman" {
 }
 
 cargo := require("cargo")
+debugger := "bs"
 
 # Show all recipies
 default:
@@ -30,12 +31,50 @@ router:
 # Run a service with variables from .env
 run name:
 	#!/usr/bin/env bash
-	export $(grep -v '^#' .env | xargs) && {{ cargo }} run --bin {{ name }}
+	set -a && source .env && set +a
+	{{ cargo }} run --bin {{ name }}
+
+test-one name:
+	#!/usr/bin/env bash
+	set -a && source .env && set +a
+	{{ cargo }} test -p {{ name }}
+bench-one name:
+	#!/usr/bin/env bash
+	set -a && source .env && set +a
+	{{ cargo }} bench -p {{ name }}
 
 alias dev := dev-services
 # Start PostgreSQL and RabbitMQ for development
 dev-services:
     {{ compose }} -f compose-dev.yaml up -d
+
+alias stop := dev-stop
 # Stop development services
 dev-stop:
     {{ compose }} -f compose-dev.yaml down
+
+# Run all services
+everything:
+	#!/usr/bin/env bash
+	set -e
+	set -a && source .env && set +a
+	{{ cargo }} build
+	PORT=5000 target/debug/bfx-rpc-router &
+	sleep 1
+	PORT=8000 target/debug/bfx-graphql &
+	for app in target/debug/bfx-*; do
+	    if [[ "$app" = "bfx-graphql" ]]; then
+	    	:
+	    elif [[ "$app" = "bfx-rpc-router" ]]; then
+	    	:
+		elif [[ "$app" = "bfx-translation-writer" ]]; then
+			:
+		elif [[ "$app" == *.d ]]; then
+			:
+		else
+			$app &
+		fi
+	done
+	trap 'kill -TERM $(jobs -p)' SIGINT
+	trap 'kill -TERM $(jobs -p)' SIGTERM
+	wait

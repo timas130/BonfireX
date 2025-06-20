@@ -1,0 +1,17 @@
+[package]
+name = "bfx-translation-writer"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+bfx-core = { workspace = true }
+bfx-proto = { workspace = true }
+
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+
+walkdir = { workspace = true }

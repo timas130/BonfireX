@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into image.image_tickets\n             (ticket, user_id, created_at)\n             values ($1, $2, now())",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "f690b22671ee4e358413b9cd4fdbcf845c44825377d8ba64634ddb353f3ead55"
+}

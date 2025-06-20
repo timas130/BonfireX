@@ -1,7 +1,13 @@
 //! Utilities for running a service
 
+pub mod client;
 pub mod database;
+pub mod environment;
+#[cfg(feature = "id_encryption")]
+pub mod id_encryption;
 mod router;
+#[cfg(feature = "s3")]
+pub mod s3;
 
 use crate::service::router::register_service;
 use std::convert::Infallible;

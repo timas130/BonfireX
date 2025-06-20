@@ -1,0 +1,15 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update auth_core.users\n             set email_verification_code = $1, email_verification_sent_at = now()\n             where id = $2",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "97664300ad2fe77a89ea45471016573d03b6a2db292f89c51e026a4a463159d8"
+}

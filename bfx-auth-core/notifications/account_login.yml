@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=../../bfx-notification/definition-schema.json
+
+id: account_login
+category: auth
+
+in-app:
+  title: '{{ t("account-login-title") }}'
+  body: '{{ t("account-login-body", ip=audit_ip) }}'

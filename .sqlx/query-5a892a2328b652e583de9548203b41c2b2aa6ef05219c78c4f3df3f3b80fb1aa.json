@@ -1,0 +1,73 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select\n                 p.user_id,\n                 pr.user_id as pr_user_id,\n                 pr.username as pr_username,\n                 pr.for_user_id,\n                 n.note\n             from unnest($1::profile.profile_request[]) pr\n             inner join profile.profiles p on p.user_id = pr.user_id or lower(p.username) = lower(pr.username)\n             left join profile.notes n on n.profile_id = p.user_id and n.user_id = pr.for_user_id",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "pr_user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "pr_username",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "for_user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "note",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        {
+          "Custom": {
+            "name": "profile.profile_request[]",
+            "kind": {
+              "Array": {
+                "Custom": {
+                  "name": "profile.profile_request",
+                  "kind": {
+                    "Composite": [
+                      [
+                        "user_id",
+                        "Int8"
+                      ],
+                      [
+                        "username",
+                        "Text"
+                      ],
+                      [
+                        "for_user_id",
+                        "Int8"
+                      ]
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "nullable": [
+      false,
+      null,
+      null,
+      null,
+      true
+    ]
+  },
+  "hash": "5a892a2328b652e583de9548203b41c2b2aa6ef05219c78c4f3df3f3b80fb1aa"
+}

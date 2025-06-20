@@ -1,0 +1,21 @@
+[package]
+name = "bfx-auth-oauth"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+bfx-core = { workspace = true }
+bfx-proto = { workspace = true }
+
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tonic = { workspace = true }
+tracing = { workspace = true }
+sqlx = { workspace = true }
+o2o = { workspace = true }
+
+openidconnect = { workspace = true }
+reqwest = { workspace = true }

@@ -1,0 +1,2 @@
+drop table auth_password_recovery.password_reset_requests;
+drop schema auth_password_recovery;

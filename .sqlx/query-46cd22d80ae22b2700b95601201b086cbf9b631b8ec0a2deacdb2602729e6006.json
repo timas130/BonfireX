@@ -1,0 +1,66 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select p.*, n.note as \"note?\"\n             from profile.profiles p\n             left join profile.notes n on n.profile_id = p.user_id and n.user_id = $3\n             where p.user_id = $1 or p.username = $2\n             limit 1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "display_name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "username",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "avatar_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "bio",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "cover_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 6,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 7,
+        "name": "note?",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "46cd22d80ae22b2700b95601201b086cbf9b631b8ec0a2deacdb2602729e6006"
+}

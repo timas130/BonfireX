@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package bfx.notification;
+
+import "types.proto";
+import "auth/core.proto";
+
+service Notification {
+  rpc SendNotification (SendNotificationRequest) returns (SendNotificationReply);
+
+  rpc SetNotificationPreferences (SetNotificationPreferencesRequest) returns (SetNotificationPreferencesReply);
+
+  rpc GetNotificationPreferences (GetNotificationPreferencesRequest) returns (GetNotificationPreferencesReply);
+}
+
+message SendNotificationRequest {
+  int64 user_id = 1;
+  // to prevent cyclic dependency on bfx-auth-core (but only when bfx-auth-core calls us :[)
+  optional bfx.auth.User user_override = 4;
+  string definition = 2;
+  map<string, bfx.ParamValue> params = 3;
+}
+
+message SendNotificationReply {
+  int64 id = 1;
+}
+
+message SetNotificationPreferencesRequest {
+  int64 user_id = 1;
+  NotificationPreferences preferences = 2;
+}
+
+message SetNotificationPreferencesReply {
+  NotificationPreferences preferences = 1;
+}
+
+message NotificationPreferences {
+  string lang_id = 1;
+  // TODO: allowed categories
+}
+
+message GetNotificationPreferencesRequest {
+  int64 user_id = 1;
+}
+
+message GetNotificationPreferencesReply {
+  NotificationPreferences preferences = 1;
+}
+
+message NotificationParams {
+  map<string, bfx.ParamValue> params = 1;
+}

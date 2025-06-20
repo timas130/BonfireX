@@ -1,0 +1,35 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into notification.preferences\n             (user_id, lang_id)\n             values ($1, $2)\n             on conflict (user_id) do update\n             set lang_id = $2\n             returning *",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "lang_id",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "8a281c2f158eb9b08633d69b23e390a4be678aef073d5131eb48bfae90c129ba"
+}

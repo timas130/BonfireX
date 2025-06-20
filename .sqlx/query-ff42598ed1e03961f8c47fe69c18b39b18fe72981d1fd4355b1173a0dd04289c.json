@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select id from notification_email.blocked_email_domains\n                 where domain = any($1) or (domain || '.') = any($1)\n                 limit 1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "TextArray"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "ff42598ed1e03961f8c47fe69c18b39b18fe72981d1fd4355b1173a0dd04289c"
+}

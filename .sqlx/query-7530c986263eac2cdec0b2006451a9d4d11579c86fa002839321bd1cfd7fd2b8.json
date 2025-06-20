@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select id, password from auth_core.users where id = $1 for update",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "password",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      true
+    ]
+  },
+  "hash": "7530c986263eac2cdec0b2006451a9d4d11579c86fa002839321bd1cfd7fd2b8"
+}

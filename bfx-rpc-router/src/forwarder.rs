@@ -11,7 +11,7 @@ use tonic::body::Body;
 use tonic::server::NamedService;
 use tonic::transport::{Channel, Endpoint};
 use tower::{Service, ServiceExt};
-use tracing::warn;
+use tracing::{info, warn};
 
 #[derive(Clone)]
 pub struct ForwardingService {
@@ -69,6 +69,7 @@ impl Service<Request<Body>> for ForwardingService {
         let endpoints = self.registry.get_endpoints(service_name);
         let endpoint = endpoints.choose(&mut rand::rng());
         let Some(endpoint) = endpoint else {
+            info!(service_name, "no endpoints available for service");
             return Box::pin(ready(Ok(error_resp(503))));
         };
 

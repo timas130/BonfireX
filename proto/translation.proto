@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "types.proto";
+
+package bfx.translation;
+
+service Translation {
+  rpc Translate (TranslateRequest) returns (TranslateReply);
+
+  rpc WriteFile (WriteFileRequest) returns (WriteFileReply);
+
+  rpc RenderTemplate (RenderTemplateRequest) returns (RenderTemplateReply);
+
+  rpc RenderStringSet (RenderStringSetRequest) returns (RenderTemplateReply);
+}
+
+message TranslateRequest {
+  string key = 1;
+  string lang = 2;
+  map<string, bfx.ParamValue> params = 3;
+}
+
+message TranslateReply {
+  string text = 1;
+  map<string, string> attributes = 2;
+}
+
+message WriteFileRequest {
+  string path = 1;
+  string lang_id = 2;
+  string source = 3;
+}
+
+message WriteFileReply {
+  int64 id = 1;
+}
+
+message RenderTemplateRequest {
+  string source = 1;
+  string lang_id = 2;
+  map<string, bfx.ParamValue> context = 3;
+}
+
+message RenderTemplateReply {
+  string output = 1;
+}
+
+message RenderStringSetRequest {
+  string lang_id = 1;
+  repeated ConditionalString conditionals = 2;
+  map<string, bfx.ParamValue> context = 3;
+}
+
+message ConditionalString {
+  optional string if = 1;
+  string value = 2;
+}

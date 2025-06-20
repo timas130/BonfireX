@@ -1,0 +1,24 @@
+[package]
+name = "bfx-image-http"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bfx-core = { workspace = true, features = ["s3"] }
+bfx-proto = { workspace = true }
+
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+axum = { workspace = true }
+serde = { workspace = true }
+sqlx = { workspace = true }
+
+jpegxl-rs = { workspace = true }
+image = { workspace = true }
+rust-s3 = { workspace = true }
+tokio-retry = { workspace = true }
+fast_image_resize = { workspace = true, features = ["image", "rayon"] }
+
+[lints]
+workspace = true

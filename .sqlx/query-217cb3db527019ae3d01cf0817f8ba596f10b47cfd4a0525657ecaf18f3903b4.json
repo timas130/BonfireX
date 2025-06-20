@@ -1,0 +1,70 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select *\n             from image.images\n             where id = $1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "full_width",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 2,
+        "name": "full_height",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 3,
+        "name": "full_size",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 4,
+        "name": "thumbnail_width",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 5,
+        "name": "thumbnail_height",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 6,
+        "name": "thumbnail_size",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 7,
+        "name": "blur_data",
+        "type_info": "Bytea"
+      },
+      {
+        "ordinal": 8,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "217cb3db527019ae3d01cf0817f8ba596f10b47cfd4a0525657ecaf18f3903b4"
+}

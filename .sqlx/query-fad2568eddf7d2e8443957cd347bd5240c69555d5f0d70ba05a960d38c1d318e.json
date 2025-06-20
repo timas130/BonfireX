@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update auth_password_recovery.password_reset_requests\n             set used_at = now()\n             where token = $1 and used_at is null and created_at > (now() - interval '24 hours')\n             returning user_id",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "user_id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false
+    ]
+  },
+  "hash": "fad2568eddf7d2e8443957cd347bd5240c69555d5f0d70ba05a960d38c1d318e"
+}

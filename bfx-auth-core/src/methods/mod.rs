@@ -1,4 +1,9 @@
+mod change_password;
 mod create_user;
+mod get_user_by_email;
 mod get_user_by_token;
 mod get_users_by_ids;
 mod login_email;
+mod login_external;
+mod send_verification_email;
+mod verify_email;

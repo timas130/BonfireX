@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package bfx.auth;
+
+service AuthOAuthProvider {
+  rpc GetOpenidConfiguration (GetOpenidConfigurationRequest) returns (GetOpenidConfigurationReply);
+  rpc GetJwkSet (GetJwkSetRequest) returns (GetJwkSetReply);
+  rpc GetAuthorizationInfo (GetAuthorizationInfoRequest) returns (GetAuthorizationInfoReply);
+  rpc AcceptAuthorization (AcceptAuthorizationRequest) returns (AcceptAuthorizationReply);
+  rpc TokenEndpoint (TokenEndpointRequest) returns (TokenEndpointReply);
+  rpc GetAccessToken (GetAccessTokenRequest) returns (GetAccessTokenReply);
+  rpc UserinfoEndpoint (UserinfoEndpointRequest) returns (UserinfoEndpointReply);
+}
+
+message GetOpenidConfigurationRequest {
+}
+
+message GetOpenidConfigurationReply {
+  string json = 1;
+}
+
+message GetJwkSetRequest {
+}
+
+message GetJwkSetReply {
+  string json = 1;
+}
+
+message GetAuthorizationInfoRequest {
+  optional int64 user_id = 1;
+  map<string, string> query = 2;
+}
+
+message GetAuthorizationInfoReply {
+  RPInfo rp_info = 1;
+  repeated string scopes = 2;
+  optional int64 flow_id = 3;
+  optional string redirect_to = 4;
+}
+
+message RPInfo {
+  int64 id = 1;
+  string display_name = 2;
+  optional string privacy_url = 3;
+  optional string tos_url = 4;
+  bool official = 5;
+}
+
+message AcceptAuthorizationRequest {
+  int64 flow_id = 1;
+  int64 user_id = 2;
+}
+
+message AcceptAuthorizationReply {
+  string redirect_to = 1;
+}
+
+message BasicAuthorization {
+  string username = 1;
+  string password = 2;
+}
+
+message TokenEndpointRequest {
+  map<string, string> query = 1;
+  optional BasicAuthorization authorization = 2;
+}
+
+message TokenEndpointReply {
+  uint32 status = 1;
+  string json = 2;
+}
+
+message GetAccessTokenRequest {
+  string access_token = 1;
+}
+
+message GetAccessTokenReply {
+  int64 user_id = 1;
+  int64 grant_id = 2;
+  int64 client_id = 3;
+  repeated string scope = 4;
+}
+
+message UserinfoEndpointRequest {
+  string access_token = 1;
+}
+
+message UserinfoEndpointReply {
+  uint32 status = 1;
+  string json = 2;
+}

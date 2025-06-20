@@ -1,0 +1,48 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "insert into auth_oauth.auth_sources (user_id, issuer, issuer_user_id)\n             values ($1, $2, $3)\n             returning *",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "issuer",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "issuer_user_id",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "49f9ef8b1e58ae71dcb03fdcec32c18eceb7575c0f612348271644548ef18aec"
+}

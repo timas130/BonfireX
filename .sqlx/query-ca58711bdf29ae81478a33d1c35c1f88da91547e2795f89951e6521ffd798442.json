@@ -1,0 +1,34 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select * from notification.preferences where user_id = $1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "lang_id",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "ca58711bdf29ae81478a33d1c35c1f88da91547e2795f89951e6521ffd798442"
+}

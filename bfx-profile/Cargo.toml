@@ -1,0 +1,19 @@
+[package]
+name = "bfx-profile"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bfx-core = { workspace = true }
+bfx-proto = { workspace = true }
+
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tonic = { workspace = true }
+sqlx = { workspace = true }
+tracing = { workspace = true }
+futures-util = { workspace = true }
+o2o = { workspace = true }
+
+[lints]
+workspace = true

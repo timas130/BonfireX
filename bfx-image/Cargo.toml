@@ -1,0 +1,21 @@
+[package]
+name = "bfx-image"
+version = "0.1.0"
+edition = "2024"
+
+[lints]
+workspace = true
+
+[dependencies]
+bfx-core = { workspace = true, features = ["s3"] }
+bfx-proto = { workspace = true }
+
+anyhow = { workspace = true }
+tokio = { workspace = true }
+tonic = { workspace = true }
+sqlx = { workspace = true }
+tracing = { workspace = true }
+futures-util = { workspace = true }
+
+nanoid = { workspace = true }
+rust-s3 = { workspace = true }

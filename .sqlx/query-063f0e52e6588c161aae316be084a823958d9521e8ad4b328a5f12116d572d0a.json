@@ -1,0 +1,18 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update profile.profiles\n             set display_name = $1, avatar_id = $2, bio = $3, cover_id = $4\n             where user_id = $5",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8",
+        "Text",
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "063f0e52e6588c161aae316be084a823958d9521e8ad4b328a5f12116d572d0a"
+}

@@ -1,0 +1,65 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select\n                 p.*,\n                 (select n.note\n                  from profile.notes n\n                  where n.profile_id = $1 and n.user_id = $2)\n             from profile.profiles p\n             where p.user_id = $1\n             for update",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "display_name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "username",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "avatar_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "bio",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "cover_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 6,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 7,
+        "name": "note",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      null
+    ]
+  },
+  "hash": "03330f5f38641c933877d0e71dacde473599443ac115713011f1a768e13cdff3"
+}

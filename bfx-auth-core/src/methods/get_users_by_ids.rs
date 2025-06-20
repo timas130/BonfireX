@@ -19,8 +19,8 @@ impl AuthCoreService {
 
         let users = sqlx::query_as!(
             RawUser,
-            "select * \
-             from auth_core.users \
+            "select *
+             from auth_core.users
              where id = any($1)",
             &user_ids,
         )

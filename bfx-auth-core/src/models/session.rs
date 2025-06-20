@@ -1,6 +1,5 @@
-use bfx_proto::auth::Session;
+use bfx_proto::auth::Tokens;
 use chrono::{DateTime, Utc};
-use o2o::o2o;
 
 pub struct RawSession {
     pub id: i64,
@@ -10,4 +9,14 @@ pub struct RawSession {
     pub access_token: String,
     pub expires_at: DateTime<Utc>,
     pub created_at: DateTime<Utc>,
+}
+
+impl From<RawSession> for Tokens {
+    fn from(session: RawSession) -> Self {
+        Self {
+            access_token: session.access_token,
+            session_id: session.id,
+            login_attempt_id: session.login_attempt_id,
+        }
+    }
 }

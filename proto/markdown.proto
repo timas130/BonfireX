@@ -1,0 +1,135 @@
+syntax = "proto3";
+
+package bfx.markdown;
+
+service Markdown {
+  rpc ParseMarkdown(ParseMarkdownRequest) returns (ParseMarkdownReply);
+}
+
+message ParseMarkdownRequest {
+  string text = 1;
+}
+
+message ParseMarkdownReply {
+  Node parsed = 1;
+}
+
+message Node {
+  oneof node {
+    RootNode root = 1;
+    BlockquoteNode blockquote = 2;
+    FootnoteDefinition footnote_definition = 3;
+    ListNode list = 4;
+    ListItemNode list_item = 5;
+    BreakNode break = 6;
+    InlineCodeNode inline_code = 7;
+    DeleteNode delete = 8;
+    EmphasisNode emphasis = 9;
+    FootnoteReferenceNode footnote_reference = 10;
+    ImageNode image = 11;
+    LinkNode link = 12;
+    StrongNode strong = 13;
+    TextNode text = 14;
+    CodeNode code = 15;
+    HeadingNode heading = 16;
+    TableNode table = 17;
+    TableRowNode table_row = 18;
+    TableCellNode table_cell = 19;
+    ThematicBreakNode thematic_break = 20;
+    DefinitionNode definition = 21;
+    ParagraphNode paragraph = 22;
+    NoopNode noop = 100;
+  }
+}
+
+message RootNode {
+  repeated Node children = 1;
+}
+message BlockquoteNode {
+  repeated Node children = 1;
+}
+message FootnoteDefinition {
+  repeated Node children = 1;
+  string identifier = 2;
+  optional string label = 3;
+}
+message ListNode {
+  repeated Node children = 1;
+  bool ordered = 2;
+  optional uint32 start = 3;
+  bool spread = 4;
+}
+message ListItemNode {
+  repeated Node children = 1;
+  bool spread = 2;
+  optional bool checked = 3;
+}
+message BreakNode {
+}
+message InlineCodeNode {
+  string value = 1;
+}
+message DeleteNode {
+  repeated Node children = 1;
+}
+message EmphasisNode {
+  repeated Node children = 1;
+}
+message FootnoteReferenceNode {
+  string identifier = 1;
+  optional string label = 2;
+}
+message ImageNode {
+  string alt = 1;
+  string url = 2;
+  optional string title = 3;
+}
+message LinkNode {
+  repeated Node children = 1;
+  string url = 2;
+  optional string title = 3;
+}
+message StrongNode {
+  repeated Node children = 1;
+}
+message TextNode {
+  string value = 1;
+}
+message CodeNode {
+  string value = 1;
+  optional string lang = 2;
+  optional string meta = 3;
+}
+message HeadingNode {
+  repeated Node children = 1;
+  uint32 depth = 2;
+}
+message TableNode {
+  repeated Node children = 1;
+  repeated AlignKind align = 2;
+}
+enum AlignKind {
+  LEFT = 0;
+  RIGHT = 1;
+  CENTER = 2;
+  NONE = 3;
+}
+message TableRowNode {
+  repeated Node children = 1;
+}
+message TableCellNode {
+  repeated Node children = 1;
+}
+message ThematicBreakNode {
+}
+message DefinitionNode {
+  string url = 1;
+  optional string title = 2;
+  string identifier = 3;
+  optional string label = 4;
+}
+message ParagraphNode {
+  repeated Node children = 1;
+}
+message NoopNode {
+}

@@ -1,0 +1,40 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select id, lang_id, source, modified_at\n             from translation.resources\n             where id = any($1)",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "lang_id",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "source",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "modified_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8Array"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "3a6402d42aa3df45fee7af5b4cab395adc7f97c21e7f641c8de2a4ab8660eca5"
+}

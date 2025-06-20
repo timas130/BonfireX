@@ -12,10 +12,11 @@ impl AuthCoreService {
     pub fn hash_password(&self, password: &str) -> anyhow::Result<String> {
         let argon2 = argon2::Argon2::default();
 
-        let salt = SaltString::generate(&mut OsRng);
+        let salt = SaltString::try_from_rng(&mut OsRng)
+            .map_err(|err| anyhow::anyhow!("rng error: {err}"))?;
         let password_hash = argon2
             .hash_password(password.as_bytes(), &salt)
-            .map_err(|err| anyhow::anyhow!(err))?
+            .map_err(|err| anyhow::anyhow!("hashing error: {err}"))?
             .to_string();
 
         Ok(password_hash)

@@ -1,0 +1,65 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select\n                 p.user_id as \"user_id!\",\n                 p.display_name,\n                 p.username as \"username!\",\n                 p.avatar_id,\n                 p.bio as \"bio!\",\n                 p.cover_id,\n                 p.created_at as \"created_at!\",\n                 null as \"note\"\n             from profile.profiles p\n             where p.user_id = any($1) or lower(p.username) = any($2)",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "user_id!",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "display_name",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "username!",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "avatar_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "bio!",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "cover_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 6,
+        "name": "created_at!",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 7,
+        "name": "note",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8Array",
+        "TextArray"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+      false,
+      null
+    ]
+  },
+  "hash": "fc572bb00b6b1b976dc5a98e8eb20bc79a8502c95958be9312ff7363845c9145"
+}

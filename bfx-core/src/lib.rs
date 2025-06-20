@@ -1,7 +1,6 @@
 //! Core library for all of BFX
 
-#![warn(clippy::all, clippy::pedantic, clippy::nursery)]
-
+pub mod log_if_error;
 pub mod logging;
 pub mod service;
 pub mod status;

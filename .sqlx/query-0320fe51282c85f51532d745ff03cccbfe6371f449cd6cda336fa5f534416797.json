@@ -1,0 +1,22 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select 1 as \"found!\"\n             from auth_password_recovery.password_reset_requests\n             where user_id = $1 and used_at is null\n                   and created_at > (now() - interval '1 hour')",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "found!",
+        "type_info": "Int4"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": [
+      null
+    ]
+  },
+  "hash": "0320fe51282c85f51532d745ff03cccbfe6371f449cd6cda336fa5f534416797"
+}
