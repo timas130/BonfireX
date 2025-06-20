@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package bfx;
+
+message DateTime {
+  int32 year = 1;
+  uint32 ordinal = 2;
+  uint32 second = 3;
+  uint32 nanos = 4;
+}
+
+message UserContext {
+  string ip = 1;
+  string user_agent = 2;
+}

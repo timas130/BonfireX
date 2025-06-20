@@ -1,0 +1,22 @@
+[package]
+name = "bfx-auth-core"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bfx-core = { workspace = true }
+bfx-proto = { workspace = true }
+
+anyhow = { workspace = true }
+tokio = { workspace = true }
+futures-util = { workspace = true }
+tonic = { workspace = true }
+sqlx = { workspace = true }
+o2o = { workspace = true }
+strum = { workspace = true }
+chrono = { workspace = true }
+
+argon2 = { workspace = true }
+validator = { workspace = true }
+zxcvbn = { workspace = true }
+nanoid = { workspace = true }

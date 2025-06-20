@@ -1,0 +1,10 @@
+{
+	admin :2019
+	servers :5000 {
+		protocols h1 h2c
+	}
+}
+
+:5000 {
+	# filled via admin api
+}

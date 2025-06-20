@@ -1,0 +1,13 @@
+[package]
+name = "bfx-proto"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tonic = { workspace = true }
+prost = { workspace = true }
+chrono = { workspace = true }
+
+[build-dependencies]
+tonic-build = { workspace = true }
+walkdir = { workspace = true }

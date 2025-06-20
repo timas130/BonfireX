@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package bfx.router_registry;
+
+// Service that keeps track of registered gRPC services for routing purposes
+service RouterRegistry {
+  // Add a service endpoint to the registry
+  rpc RegisterService (RegisterServiceRequest) returns (RegisterServiceReply);
+  // Indicate that a service endpoint is up and running smoothly.
+  // Services must call this endpoint at least once every 5 seconds.
+  // If this call fails, the service should terminate or reregister.
+  rpc HealthPing (HealthPingRequest) returns (HealthPingResponse);
+  // Remove a service endpoint from the registry
+  rpc UnregisterService (UnregisterServiceRequest) returns (UnregisterServiceReply);
+}
+
+message RegistrationInfo {
+  // Fully qualified service name (example: "hello.Hello")
+  string service_name = 1;
+  // URI where the service is accessible (example: "grpc://127.0.0.1:50051")
+  string address = 2;
+}
+
+message RegisterServiceRequest {
+  RegistrationInfo info = 1;
+}
+
+message RegisterServiceReply {
+}
+
+message HealthPingRequest {
+  RegistrationInfo info = 1;
+}
+
+message HealthPingResponse {
+}
+
+message UnregisterServiceRequest {
+  RegistrationInfo info = 1;
+}
+
+message UnregisterServiceReply {
+}

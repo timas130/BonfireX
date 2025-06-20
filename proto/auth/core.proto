@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+import "types.proto";
+
+package bfx.auth;
+
+service AuthCore {
+  rpc GetUsersByIds (GetUsersByIdsRequest) returns (GetUsersByIdsReply);
+
+  rpc CreateUser (CreateUserRequest) returns (CreateUserReply);
+
+  rpc LoginEmail (LoginEmailRequest) returns (LoginEmailReply);
+
+  rpc GetUserByToken (GetUserByTokenRequest) returns (GetUserByTokenReply);
+}
+
+enum PermissionLevel {
+  USER = 0;
+  ADMIN = 1;
+  SYSTEM = 2;
+}
+
+message User {
+  int64 id = 1;
+  optional string email = 2;
+  PermissionLevel permission_level = 3;
+  bool banned = 4;
+  bool active = 5;
+  bfx.DateTime email_verification_sent_at = 6;
+  bfx.DateTime created_at = 7;
+}
+
+message GetUsersByIdsRequest {
+  repeated int64 ids = 1;
+}
+message GetUsersByIdsReply {
+  repeated User users = 1;
+}
+
+message CreateUserRequest {
+  optional string email = 1;
+  bool active = 2;
+  optional string password = 3;
+}
+message CreateUserReply {
+  User user = 1;
+}
+
+message LoginEmailRequest {
+  string email = 1;
+  string password = 2;
+  bfx.UserContext user_context = 3;
+}
+message LoginEmailReply {
+  oneof login_result {
+    Tokens tokens = 1;
+    TfaChallenge tfa_challenge = 2;
+  }
+}
+
+message TfaChallenge {
+  string tfa_wait_token = 1;
+  repeated TfaMethod methods = 2;
+}
+
+enum TfaMethod {
+  EMAIL_LINK = 0;
+  TOTP = 1;
+  RECOVERY_CODE = 2;
+}
+
+message Tokens {
+  string access_token = 1;
+  int64 session_id = 2;
+  int64 login_attempt_id = 3;
+}
+
+enum LoginAttemptStatus {
+  SUCCESS = 0;
+  INCORRECT_PASSWORD = 1;
+  TOO_MANY_ATTEMPTS = 2;
+  TFA_PENDING = 3;
+}
+
+message GetUserByTokenRequest {
+  string access_token = 1;
+}
+
+message Session {
+  int64 id = 1;
+  int64 user_id = 2;
+  bfx.UserContext user_context = 3;
+  bfx.DateTime expires_at = 4;
+  bfx.DateTime created_at = 5;
+}
+
+message GetUserByTokenReply {
+  User user = 1;
+  Session session = 2;
+}

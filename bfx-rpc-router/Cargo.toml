@@ -1,0 +1,17 @@
+[package]
+name = "bfx-rpc-router"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bfx-core = { workspace = true }
+bfx-proto = { workspace = true }
+tokio = { workspace = true }
+tonic = { workspace = true }
+dashmap = { workspace = true }
+arc-swap = { workspace = true }
+tower = { workspace = true }
+http = { workspace = true }
+rand = { workspace = true }
+tracing = { workspace = true }
+moka = { workspace = true }
