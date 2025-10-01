@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update auth_core.sessions set expires_at = now() where user_id = $1",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "b0401ef626f2cbd2027d8e35786d7325324d3a6452796eda722f0718f5eed697"
+}

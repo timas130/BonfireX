@@ -1,0 +1,40 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select\n                 f.scopes,\n                 f.grant_id as \"grant_id!\",\n                 f.client_id,\n                 g.user_id\n             from auth_oauth_provider.flows f\n             inner join auth_oauth_provider.grants g on f.grant_id = g.id\n             where f.access_token = $1 and f.access_token_expires_at > now()\n                   and grant_id is not null",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "scopes",
+        "type_info": "TextArray"
+      },
+      {
+        "ordinal": 1,
+        "name": "grant_id!",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "client_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "user_id",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "6e35b2478060ac08d0cf2432faa9c7f7c87f241dbfc86e70fcc19e6f4748cd11"
+}

@@ -1,0 +1,119 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "select * from auth_oauth_provider.flows\n             where id = $1 and user_id = $2 and code is null",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "client_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 2,
+        "name": "grant_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "user_id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 4,
+        "name": "redirect_uri",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "scopes",
+        "type_info": "TextArray"
+      },
+      {
+        "ordinal": 6,
+        "name": "state",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 7,
+        "name": "nonce",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 8,
+        "name": "code_challenge",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 9,
+        "name": "code_challenge_method",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 10,
+        "name": "code",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 11,
+        "name": "access_token",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 12,
+        "name": "refresh_token",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 13,
+        "name": "created_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 14,
+        "name": "authorized_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 15,
+        "name": "access_token_expires_at",
+        "type_info": "Timestamptz"
+      },
+      {
+        "ordinal": 16,
+        "name": "refresh_token_expires_at",
+        "type_info": "Timestamptz"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true,
+      true
+    ]
+  },
+  "hash": "3601f8b375532b694f1942ccdd216c032bcdd2dbd31ce1d0e28ae5cc5d7872e3"
+}

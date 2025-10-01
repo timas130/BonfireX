@@ -1,0 +1,17 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update auth_oauth_provider.flows\n             set access_token = $1,\n                 refresh_token = $2,\n                 access_token_expires_at = $3,\n                 authorized_at = now()\n             where id = $4",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Timestamptz",
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "d78e2e4ed41b97a902bbca83d9aefd2b903ba5084a9fff0d966a2d9b48334382"
+}

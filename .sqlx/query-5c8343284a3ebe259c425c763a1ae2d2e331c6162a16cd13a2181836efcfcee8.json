@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "update auth_oauth_provider.flows\n             set code = $1, grant_id = $2\n             where id = $3",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8",
+        "Int8"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "5c8343284a3ebe259c425c763a1ae2d2e331c6162a16cd13a2181836efcfcee8"
+}
